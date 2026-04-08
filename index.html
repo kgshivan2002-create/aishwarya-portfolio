@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Aishwarya M — Chief HR &amp; Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --lav-deep:   #2e1a50;
+  --lav-mid:    #5e3d8f;
+  --lav-soft:   #9d7dcb;
+  --lav-pale:   #cdb5e8;
+  --blush:      #d9a8c4;
+  --gold:       #b87aaa;
+  --cream:      #ede0f8;
+  --text-dark:  #1c0f33;
+  --text-mid:   #4a2e6e;
+  --text-light: #7050a0;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'DM Sans',sans-serif;
+  background:var(--cream);
+  color:var(--text-dark);
+  overflow-x:hidden;
+  cursor:auto;
+}
+
+/* CUSTOM CURSOR */
+#cursor { position:fixed; top:0; left:0; z-index:9999; pointer-events:none; }
+#cursor-dot {
+  width:10px; height:10px; border-radius:50%;
+  background:var(--lav-mid);
+  position:absolute; transform:translate(-50%,-50%);
+  opacity:0;
+}
+#cursor-ring {
+  width:38px; height:38px; border-radius:50%;
+  border:2px solid var(--lav-soft);
+  position:absolute; transform:translate(-50%,-50%);
+  transition:width .2s, height .2s, border-color .2s;
+  opacity:0;
+}
+body.custom-cursor-active { cursor:none; }
+body.custom-cursor-active a,
+body.custom-cursor-active button,
+body.custom-cursor-active .btn,
+body.custom-cursor-active .tag,
+body.custom-cursor-active .skill-card,
+body.custom-cursor-active .clink { cursor:none; }
+
+/* BACKGROUND */
+#bg-canvas {
+  position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+  background:
+    radial-gradient(ellipse at 15% 15%, rgba(196,167,231,.45) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 85%, rgba(157,125,203,.35) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 50%, rgba(209,185,242,.25) 0%, transparent 70%),
+    var(--cream);
+}
+.orb {
+  position:absolute; border-radius:50%;
+  filter:blur(88px); opacity:.52;
+  animation:floatOrb linear infinite;
+}
+.o1{width:540px;height:540px;background:radial-gradient(circle,#9d7dcb,transparent 70%);top:-12%;left:-8%;animation-duration:22s;}
+.o2{width:420px;height:420px;background:radial-gradient(circle,#d9a8c4,transparent 70%);top:38%;right:-8%;animation-duration:18s;animation-delay:-6s;}
+.o3{width:360px;height:360px;background:radial-gradient(circle,#5e3d8f,transparent 70%);bottom:-4%;left:22%;animation-duration:26s;animation-delay:-12s;}
+.o4{width:290px;height:290px;background:radial-gradient(circle,#cdb5e8,transparent 70%);top:18%;left:52%;animation-duration:21s;animation-delay:-4s;}
+.o5{width:210px;height:210px;background:radial-gradient(circle,#b87aaa,transparent 70%);bottom:22%;right:14%;animation-duration:16s;animation-delay:-9s;}
+@keyframes floatOrb {
+  0%  {transform:translate(0,0) scale(1);}
+  33% {transform:translate(32px,-42px) scale(1.06);}
+  66% {transform:translate(-24px,24px) scale(.94);}
+  100%{transform:translate(0,0) scale(1);}
+}
+
+/* PARTICLES */
+#particles { position:fixed; inset:0; z-index:0; pointer-events:none; }
+.particle {
+  position:absolute; border-radius:50%;
+  background:var(--lav-soft); opacity:0;
+  animation:sparkle ease-in-out infinite;
+}
+@keyframes sparkle {
+  0%,100%{opacity:0;transform:translateY(0) scale(0);}
+  50%    {opacity:.6;transform:translateY(-34px) scale(1);}
+}
+
+/* NAV */
+nav {
+  position:fixed; top:0; width:100%; z-index:500;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:1.3rem 4rem;
+  background:rgba(215,190,245,.88);
+  backdrop-filter:blur(22px);
+  border-bottom:1px solid rgba(157,125,203,.28);
+  animation:slideDown .8s ease both;
+}
+@keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+.nav-logo {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem; font-weight:600; color:var(--lav-deep); letter-spacing:.04em;
+}
+.nav-links{display:flex;gap:2.4rem;list-style:none;}
+.nav-links a {
+  font-size:.82rem; font-weight:500; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--text-mid); text-decoration:none;
+  position:relative; transition:color .3s;
+}
+.nav-links a::after {
+  content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px;
+  background:var(--lav-mid); transition:width .3s;
+}
+.nav-links a:hover { color:var(--lav-deep); }
+.nav-links a:hover::after { width:100%; }
+.nav-links a.active { color:var(--lav-deep); }
+.nav-links a.active::after { width:100%; }
+
+/* HERO */
+#hero {
+  position:relative; z-index:1;
+  min-height:100vh; display:flex; align-items:center; justify-content:center;
+  padding:8rem 4rem 5rem; text-align:center;
+}
+.hero-inner{max-width:860px;}
+.hero-tag {
+  display:inline-block; padding:.42rem 1.5rem; border-radius:100px;
+  background:rgba(157,125,203,.18); border:1px solid var(--lav-soft);
+  font-size:.76rem; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--lav-mid); margin-bottom:2rem;
+  opacity:0; animation:fadeUp .8s .3s ease both;
+}
+.hero-name {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(4rem,10vw,8rem); font-weight:300; line-height:1;
+  color:var(--lav-deep); letter-spacing:-.01em;
+  opacity:0; animation:fadeUp .9s .5s ease both;
+}
+.hero-name em {
+  font-style:italic;
+  background:linear-gradient(135deg,var(--lav-mid),var(--blush));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero-title {
+  font-size:1.05rem; font-weight:300; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--text-light);
+  margin:1.6rem 0 2rem;
+  opacity:0; animation:fadeUp .9s .7s ease both;
+}
+.hero-desc {
+  font-size:1.05rem; line-height:1.85; color:var(--text-mid);
+  max-width:600px; margin:0 auto 3rem;
+  opacity:0; animation:fadeUp .9s .9s ease both;
+}
+.hero-cta {
+  display:flex; gap:1.2rem; justify-content:center; flex-wrap:wrap;
+  opacity:0; animation:fadeUp .9s 1.1s ease both;
+}
+.btn {
+  display:inline-block; padding:.9rem 2.4rem; border-radius:100px;
+  font-size:.88rem; font-weight:500; letter-spacing:.06em;
+  text-decoration:none; transition:all .3s;
+}
+.btn-primary {
+  background:linear-gradient(135deg,var(--lav-mid),var(--lav-deep));
+  color:#fff; box-shadow:0 8px 30px rgba(94,61,143,.35);
+}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(94,61,143,.45);}
+.btn-outline {
+  border:1.5px solid var(--lav-soft); color:var(--lav-mid);
+  background:rgba(255,255,255,.45); backdrop-filter:blur(10px);
+}
+.btn-outline:hover{background:rgba(157,125,203,.15);transform:translateY(-3px);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+
+/* SHARED SECTION */
+section{position:relative;z-index:1;}
+.sw{max-width:1100px;margin:0 auto;padding:6rem 4rem;}
+.sl {
+  font-size:.7rem; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--lav-mid); margin-bottom:.8rem;
+  display:flex; align-items:center; gap:.8rem;
+}
+.sl::before{content:'';display:block;width:28px;height:1px;background:var(--lav-soft);}
+.sh {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.4rem,5vw,3.8rem); font-weight:300;
+  color:var(--lav-deep); line-height:1.15; margin-bottom:3.5rem;
+}
+.sh em{font-style:italic;color:var(--lav-mid);}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ABOUT */
+#about{background:rgba(210,185,245,.42);}
+.about-grid{display:grid;grid-template-columns:1fr 1.35fr;gap:5rem;align-items:center;}
+.about-card {
+  background:linear-gradient(135deg,rgba(196,167,231,.22),rgba(217,168,196,.14));
+  border:1px solid rgba(157,125,203,.3); border-radius:24px;
+  padding:3rem; text-align:center;
+  backdrop-filter:blur(12px);
+  box-shadow:0 20px 60px rgba(46,26,80,.1);
+  position:relative; overflow:hidden;
+}
+.about-card::before {
+  content:''; position:absolute; top:-40%; left:-40%; width:180%; height:180%;
+  background:radial-gradient(circle,rgba(196,167,231,.18) 0%,transparent 60%);
+  animation:slowRot 20s linear infinite;
+}
+@keyframes slowRot{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.ac-avatar {
+  width:120px; height:120px; border-radius:50%; margin:0 auto 1.5rem;
+  background:linear-gradient(135deg,var(--lav-mid),var(--blush));
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Cormorant Garamond',serif; font-size:3rem; color:#fff; font-weight:300;
+  box-shadow:0 10px 40px rgba(94,61,143,.3);
+  position:relative; z-index:1;
+}
+.ac-name{font-family:'Cormorant Garamond',serif;font-size:1.45rem;color:var(--lav-deep);position:relative;z-index:1;}
+.ac-role{font-size:.82rem;color:var(--text-light);margin:.3rem 0 .3rem;position:relative;z-index:1;}
+.ac-loc{font-size:.74rem;color:var(--lav-soft);letter-spacing:.1em;text-transform:uppercase;position:relative;z-index:1;}
+.ac-stats{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin-top:2rem;position:relative;z-index:1;}
+.sbox{background:rgba(255,255,255,.65);border-radius:14px;padding:1rem;border:1px solid rgba(196,167,231,.25);}
+.snum{font-family:'Cormorant Garamond',serif;font-size:2.1rem;font-weight:600;color:var(--lav-mid);display:block;}
+.slbl{font-size:.68rem;color:var(--text-light);letter-spacing:.08em;text-transform:uppercase;}
+.about-text p{font-size:1.04rem;line-height:1.9;color:var(--text-mid);margin-bottom:1.4rem;}
+.about-text p strong{color:var(--lav-deep);font-weight:500;}
+.about-tags{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.5rem;}
+.tag {
+  padding:.38rem 1rem; border-radius:100px;
+  background:rgba(196,167,231,.2); border:1px solid rgba(196,167,231,.4);
+  font-size:.76rem; color:var(--lav-mid); letter-spacing:.05em; transition:all .3s;
+}
+.tag:hover{background:var(--lav-soft);color:#fff;transform:translateY(-2px);}
+
+/* EXPERIENCE */
+#experience{background:var(--cream);}
+.timeline{position:relative;}
+.timeline::before {
+  content:''; position:absolute; left:0; top:0; bottom:0; width:1px;
+  background:linear-gradient(to bottom,transparent,var(--lav-soft) 15%,var(--lav-soft) 85%,transparent);
+}
+.exp-item {
+  padding-left:3rem; padding-bottom:3.5rem; position:relative;
+  opacity:0; transform:translateX(-24px);
+  transition:opacity .6s ease,transform .6s ease;
+}
+.exp-item.visible{opacity:1;transform:translateX(0);}
+.exp-dot {
+  position:absolute; left:-7px; top:.5rem;
+  width:15px; height:15px; border-radius:50%;
+  background:var(--lav-mid); border:3px solid var(--cream);
+  box-shadow:0 0 0 4px rgba(94,61,143,.22);
+}
+.exp-dot.current {
+  background:var(--blush);
+  animation:pulseDot 2.2s ease-in-out infinite;
+}
+@keyframes pulseDot {
+  0%,100%{box-shadow:0 0 0 4px rgba(217,168,196,.35),0 0 20px rgba(217,168,196,.5);}
+  50%    {box-shadow:0 0 0 9px rgba(217,168,196,.15),0 0 32px rgba(217,168,196,.65);}
+}
+.exp-date{font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;color:var(--lav-soft);margin-bottom:.5rem;}
+.exp-role{font-family:'Cormorant Garamond',serif;font-size:1.65rem;font-weight:600;color:var(--lav-deep);margin-bottom:.25rem;}
+.exp-company{font-size:.87rem;color:var(--lav-mid);letter-spacing:.06em;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;}
+.ebadge{font-size:.68rem;padding:.2rem .75rem;border-radius:100px;background:rgba(196,167,231,.22);color:var(--lav-mid);}
+.exp-points{list-style:none;margin-top:.5rem;}
+.exp-points li{font-size:.95rem;color:var(--text-mid);padding:.38rem 0;padding-left:1.4rem;position:relative;line-height:1.72;}
+.exp-points li::before{content:'';position:absolute;left:0;top:.9rem;width:6px;height:6px;border-radius:50%;background:var(--lav-soft);}
+.exp-points li strong{color:var(--lav-deep);font-weight:500;}
+
+/* SKILLS */
+#skills{background:rgba(200,175,240,.35);}
+.skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;}
+.skill-card {
+  background:rgba(255,255,255,.72);
+  border:1px solid rgba(196,167,231,.28); border-radius:20px; padding:1.8rem;
+  backdrop-filter:blur(10px);
+  transition:all .4s ease;
+  opacity:0; transform:translateY(22px);
+}
+.skill-card.visible{opacity:1;transform:translateY(0);}
+.skill-card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 22px 50px rgba(94,61,143,.14);border-color:rgba(157,125,203,.5);}
+.sk-icon{font-size:1.9rem;margin-bottom:.9rem;}
+.sk-cat{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--lav-mid);margin-bottom:.5rem;}
+.sk-name{font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:var(--lav-deep);margin-bottom:.75rem;}
+.chips{display:flex;flex-wrap:wrap;gap:.35rem;}
+.chip{font-size:.7rem;padding:.22rem .75rem;border-radius:100px;background:rgba(196,167,231,.15);color:var(--text-light);border:1px solid rgba(196,167,231,.3);}
+
+/* EDUCATION */
+#education{background:var(--cream);}
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+.edu-card {
+  background:linear-gradient(135deg,rgba(196,167,231,.12),rgba(217,168,196,.08));
+  border:1px solid rgba(196,167,231,.28); border-radius:20px;
+  padding:2.5rem; position:relative; overflow:hidden;
+  transition:all .4s ease;
+  opacity:0; transform:translateY(22px);
+}
+.edu-card.visible{opacity:1;transform:translateY(0);}
+.edu-card:hover{transform:translateY(-6px);box-shadow:0 18px 42px rgba(94,61,143,.1);}
+.edu-card::before {
+  content:''; position:absolute; top:-60%; right:-30%;
+  width:200px; height:200px; border-radius:50%;
+  background:radial-gradient(circle,rgba(196,167,231,.22),transparent 70%);
+}
+.edu-degree{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--lav-deep);margin-bottom:.45rem;position:relative;z-index:1;}
+.edu-spec  {font-size:.8rem;color:var(--lav-mid);margin-bottom:.9rem;letter-spacing:.04em;}
+.edu-uni   {font-size:.87rem;color:var(--text-mid);margin-bottom:.4rem;font-weight:500;}
+.edu-year  {font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-light);display:flex;align-items:center;gap:.5rem;}
+.edu-year::before{content:'';display:block;width:20px;height:1px;background:var(--lav-soft);}
+.award-banner {
+  margin-top:2.5rem; padding:1.8rem 2.2rem;
+  background:linear-gradient(135deg,rgba(157,125,203,.16),rgba(184,122,170,.1));
+  border:1px solid rgba(157,125,203,.3); border-radius:18px;
+  display:flex; align-items:center; gap:1.4rem;
+}
+.award-icon{font-size:2.4rem;flex-shrink:0;}
+.award-title{font-family:'Cormorant Garamond',serif;font-size:1.28rem;color:var(--lav-deep);}
+.award-desc{font-size:.86rem;color:var(--text-light);margin-top:.3rem;line-height:1.6;}
+
+/* CONTACT */
+#contact{background:linear-gradient(145deg,var(--lav-deep) 0%,#1e0e38 100%);}
+#contact .sl{color:var(--lav-soft);}
+#contact .sl::before{background:rgba(157,125,203,.5);}
+#contact .sh{color:#fff;}
+#contact .sh em{color:var(--lav-soft);}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.contact-intro{font-size:1rem;color:rgba(255,255,255,.62);line-height:1.9;margin-bottom:2.4rem;}
+.contact-links{display:flex;flex-direction:column;gap:.95rem;}
+.clink {
+  display:flex; align-items:center; gap:1.1rem;
+  padding:1rem 1.4rem; border-radius:14px;
+  background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1);
+  text-decoration:none; color:#fff; transition:all .3s;
+}
+.clink:hover{background:rgba(157,125,203,.18);transform:translateX(7px);border-color:rgba(157,125,203,.35);}
+.ci{font-size:1.15rem;width:24px;text-align:center;flex-shrink:0;}
+.clabel{font-size:.68rem;color:var(--lav-soft);display:block;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.15rem;}
+.cval{font-size:.9rem;}
+.contact-visual{display:flex;align-items:center;justify-content:center;position:relative;height:420px;}
+.spin-outer {
+  width:300px; height:300px; border-radius:50%;
+  background:linear-gradient(135deg,rgba(196,167,231,.14),rgba(217,168,196,.08));
+  border:1px solid rgba(196,167,231,.22);
+  display:flex; align-items:center; justify-content:center;
+  animation:cw 28s linear infinite;
+}
+.spin-inner {
+  width:215px; height:215px; border-radius:50%;
+  background:linear-gradient(135deg,rgba(94,61,143,.22),rgba(46,26,80,.32));
+  border:1px solid rgba(196,167,231,.18);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  animation:ccw 28s linear infinite;
+}
+@keyframes cw {from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes ccw{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
+.spin-mono{font-family:'Cormorant Garamond',serif;font-size:3.6rem;color:#fff;opacity:.92;}
+.spin-sub{font-size:.65rem;letter-spacing:.18em;color:var(--lav-soft);text-transform:uppercase;margin-top:.3rem;}
+.orbit {
+  position:absolute; border-radius:50%;
+  border:1px dashed rgba(157,125,203,.3);
+  animation:cw linear infinite;
+}
+.orbit-dot{position:absolute;top:-5px;left:50%;transform:translateX(-50%);border-radius:50%;}
+
+/* FOOTER */
+footer {
+  background:#140a22; padding:1.8rem 4rem;
+  display:flex; justify-content:space-between; align-items:center;
+  color:rgba(255,255,255,.28); font-size:.73rem; letter-spacing:.06em;
+}
+footer a{color:var(--lav-soft);text-decoration:none;}
+footer a:hover{color:var(--lav-pale);}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:1.1rem 2rem;}
+  .sw{padding:4.5rem 2rem;}
+  .about-grid,.contact-grid,.edu-grid{grid-template-columns:1fr;}
+  .skills-grid{grid-template-columns:repeat(2,1fr);}
+  .contact-visual{display:none;}
+  #hero{padding:7rem 2rem 4rem;}
+}
+@media(max-width:560px){
+  .skills-grid{grid-template-columns:1fr;}
+  .nav-links{display:none;}
+  footer{flex-direction:column;gap:.6rem;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cursor">
+  <div id="cursor-ring"></div>
+  <div id="cursor-dot"></div>
+</div>
+
+<!-- BACKGROUND -->
+<div id="bg-canvas">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+  <div class="orb o4"></div>
+  <div class="orb o5"></div>
+</div>
+<div id="particles"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Aishwarya M</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Connect</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Chief HR &amp; Admin · MBA · Vadavalli, Coimbatore</div>
+    <h1 class="hero-name">Aishwarya <em>M</em></h1>
+    <p class="hero-title">Chief HR &amp; Admin &nbsp;·&nbsp; Strategy &nbsp;·&nbsp; Leadership</p>
+    <p class="hero-desc">
+      A dynamic MBA professional where chemistry meets humanity — leading people,
+      shaping culture, and crafting organisations that thrive on purpose and innovation.
+    </p>
+    <div class="hero-cta">
+      <a href="#experience" class="btn btn-primary">View My Journey</a>
+      <a href="#contact" class="btn btn-outline">Let's Connect</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sw">
+    <div class="about-grid">
+
+      <div class="reveal">
+        <div class="about-card">
+          <div class="ac-avatar">A</div>
+          <div class="ac-name">Aishwarya M</div>
+          <div class="ac-role">Chief HR &amp; Admin · Tektork Pvt. Ltd.</div>
+          <div class="ac-loc">Vadavalli, Coimbatore, Tamil Nadu</div>
+          <div class="ac-stats">
+            <div class="sbox"><span class="snum">1+</span><span class="slbl">Years Exp.</span></div>
+            <div class="sbox"><span class="snum">MBA</span><span class="slbl">HR &amp; Strategy</span></div>
+            <div class="sbox"><span class="snum">3</span><span class="slbl">Roles Held</span></div>
+            <div class="sbox"><span class="snum">BSc</span><span class="slbl">Chemistry</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-text reveal">
+        <div class="sl">About Me</div>
+        <h2 class="sh">Where Science<br>Meets <em>Human Spirit</em></h2>
+        <p>
+          I am a <strong>results-driven MBA professional</strong> with an unusual superpower — a mind shaped
+          by Chemistry and a heart for people. Currently serving as <strong>Chief HR &amp; Admin at
+          Tektork Private Limited</strong>, I bring analytical precision to the very human world of talent,
+          culture, and organisational growth.
+        </p>
+        <p>
+          From crafting sales pitches at VS Online Services to analysing factory workflows at ELGI
+          Equipments — every experience has added a layer to who I am: <strong>adaptable, accountable,
+          and always learning</strong>.
+        </p>
+        <p>
+          I believe great organisations are built on <strong>great people</strong>, and I am here to
+          find them, grow them, and keep them inspired.
+        </p>
+        <div class="about-tags">
+          <span class="tag">🏆 Public Speaking</span>
+          <span class="tag">Event Management</span>
+          <span class="tag">Content Creation</span>
+          <span class="tag">Design Thinking</span>
+          <span class="tag">Travel &amp; Culture</span>
+          <span class="tag">Continuous Learning</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="sw">
+    <div class="reveal">
+      <div class="sl">Career Journey</div>
+      <h2 class="sh">Professional <em>Experience</em></h2>
+    </div>
+    <div class="timeline">
+
+      <div class="exp-item">
+        <div class="exp-dot current"></div>
+        <div class="exp-date">July 2025 — Present &nbsp;·&nbsp; 1+ Year</div>
+        <div class="exp-role">Chief HR &amp; Admin</div>
+        <div class="exp-company">
+          Tektork Private Limited <span class="ebadge">Current Role</span> Coimbatore
+        </div>
+        <ul class="exp-points">
+          <li>Lead end-to-end recruitment — sourcing, screening, interviewing, and onboarding across all departments.</li>
+          <li>Develop and implement HR policies, compliance frameworks, and procedures aligned with organisational goals.</li>
+          <li><strong>Financial management</strong> — budgeting, payroll processing, expense tracking, and financial reporting.</li>
+          <li><strong>Marketing and sales management</strong> — coordinating promotional strategies, client outreach, and brand communications.</li>
+          <li>Manage administrative operations ensuring seamless day-to-day functioning across all departments.</li>
+          <li>Handle employee relations, resolve workplace conflicts, and cultivate a positive, inclusive culture.</li>
+          <li>Drive employee engagement initiatives and support performance management and appraisal cycles.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div class="exp-date">July 2024 — August 2024 &nbsp;·&nbsp; 2 Months</div>
+        <div class="exp-role">Internship Trainee</div>
+        <div class="exp-company">
+          ELGI Equipments Limited <span class="ebadge">Manufacturing</span> Coimbatore
+        </div>
+        <ul class="exp-points">
+          <li>Conducted a comprehensive organisational study of departmental functions and cross-functional workflows in industrial air compressors.</li>
+          <li>Analysed operational processes to identify inefficiencies and recommended targeted improvements.</li>
+          <li>Collaborated across teams to prepare a detailed organisational dynamics report.</li>
+          <li>Presented analytical findings and strategic recommendations directly to senior management.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div class="exp-date">February 2024 — July 2024 &nbsp;·&nbsp; 6 Months</div>
+        <div class="exp-role">Sales &amp; Marketing Intern</div>
+        <div class="exp-company">
+          VS Online Services <span class="ebadge">Marketing</span> Chennai
+        </div>
+        <ul class="exp-points">
+          <li>Developed persuasive sales pitches and marketing collateral supporting client acquisition and retention.</li>
+          <li>Coordinated with cross-functional teams to plan and execute targeted promotional campaigns.</li>
+          <li>Tracked campaign metrics and contributed insights to improve marketing effectiveness and ROI.</li>
+          <li>Built and maintained client communications to strengthen long-term business relationships.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="sw">
+    <div class="reveal">
+      <div class="sl">Capabilities</div>
+      <h2 class="sh">Skills &amp; <em>Competencies</em></h2>
+    </div>
+    <div class="skills-grid">
+
+      <div class="skill-card">
+        <div class="sk-icon">👥</div>
+        <div class="sk-cat">Core Strength</div>
+        <div class="sk-name">HR &amp; Talent</div>
+        <div class="chips">
+          <span class="chip">Recruiting</span>
+          <span class="chip">HR Development</span>
+          <span class="chip">Onboarding</span>
+          <span class="chip">Employee Relations</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="sk-icon">💰</div>
+        <div class="sk-cat">Finance</div>
+        <div class="sk-name">Financial Management</div>
+        <div class="chips">
+          <span class="chip">Budgeting</span>
+          <span class="chip">Payroll</span>
+          <span class="chip">Expense Tracking</span>
+          <span class="chip">Financial Reporting</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="sk-icon">📣</div>
+        <div class="sk-cat">Growth</div>
+        <div class="sk-name">Marketing &amp; Sales</div>
+        <div class="chips">
+          <span class="chip">Marketing Strategy</span>
+          <span class="chip">Sales Management</span>
+          <span class="chip">Client Outreach</span>
+          <span class="chip">Brand Communication</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="sk-icon">📊</div>
+        <div class="sk-cat">Domain</div>
+        <div class="sk-name">Business Strategy</div>
+        <div class="chips">
+          <span class="chip">Strategic Planning</span>
+          <span class="chip">Business Development</span>
+          <span class="chip">Process Optimization</span>
+          <span class="chip">Accounting</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="sk-icon">💻</div>
+        <div class="sk-cat">Technical</div>
+        <div class="sk-name">Tools &amp; Analysis</div>
+        <div class="chips">
+          <span class="chip">MS Excel</span>
+          <span class="chip">HR Documentation</span>
+          <span class="chip">Report Writing</span>
+          <span class="chip">Data Analysis</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="sk-icon">✨</div>
+        <div class="sk-cat">Interpersonal</div>
+        <div class="sk-name">Soft Skills</div>
+        <div class="chips">
+          <span class="chip">Leadership</span>
+          <span class="chip">Communication</span>
+          <span class="chip">Problem Solving</span>
+          <span class="chip">Adaptability</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="sk-icon">🎤</div>
+        <div class="sk-cat">Creative</div>
+        <div class="sk-name">Expression</div>
+        <div class="chips">
+          <span class="chip">Public Speaking 🏆</span>
+          <span class="chip">Content Creation</span>
+          <span class="chip">Design Thinking</span>
+          <span class="chip">Event Management</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="sk-icon">🌐</div>
+        <div class="sk-cat">Languages</div>
+        <div class="sk-name">Communication</div>
+        <div class="chips">
+          <span class="chip">English — Proficient</span>
+          <span class="chip">Tamil — Native</span>
+          <span class="chip">Malayalam — Proficient</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="sw">
+    <div class="reveal">
+      <div class="sl">Academic Background</div>
+      <h2 class="sh">Education &amp; <em>Foundation</em></h2>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-degree">Master of Business Administration</div>
+        <div class="edu-spec">HR &amp; Business Management</div>
+        <div class="edu-uni">Anna University Regional Campus, Coimbatore</div>
+        <div class="edu-year">2023 – 2025</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-degree">Bachelor of Science</div>
+        <div class="edu-spec">Chemistry — Scientific Foundations</div>
+        <div class="edu-uni">Sree Ayyappa College for Women, Nagercoil</div>
+        <div class="edu-year">2020 — 2023</div>
+      </div>
+    </div>
+    <div class="award-banner reveal">
+      <div class="award-icon">🏆</div>
+      <div>
+        <div class="award-title">Public Speaking Recognition</div>
+        <div class="award-desc">Awarded for outstanding oratory skills and stage presence — a natural communicator and storyteller.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sw">
+    <div class="contact-grid">
+      <div>
+        <div class="sl">Get In Touch</div>
+        <h2 class="sh">Let's <em>Connect</em> &amp;<br>Create Together</h2>
+        <p class="contact-intro">
+          Whether you're looking for a dedicated HR professional, want to collaborate,
+          or simply want to have a meaningful conversation about people and organisations —
+          my inbox is always open.
+        </p>
+        <div class="contact-links">
+          <a href="mailto:maishwarya806@gmail.com" class="clink">
+            <span class="ci">✉</span>
+            <div><span class="clabel">Email</span><span class="cval">maishwarya806@gmail.com</span></div>
+          </a>
+          <a href="tel:+919487187572" class="clink">
+            <span class="ci">📞</span>
+            <div><span class="clabel">Phone</span><span class="cval">+91 94871 87572</span></div>
+          </a>
+          <a href="https://www.linkedin.com/in/aishwarya-m-533280247" target="_blank" rel="noopener" class="clink">
+            <span class="ci">🔗</span>
+            <div><span class="clabel">LinkedIn</span><span class="cval">linkedin.com/in/aishwarya-m-533280247</span></div>
+          </a>
+          <div class="clink" style="cursor:default;">
+            <span class="ci">📍</span>
+            <div><span class="clabel">Location</span><span class="cval">Vadavalli, Coimbatore, Tamil Nadu</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-visual">
+        <div class="orbit" style="width:370px;height:370px;animation-duration:22s;position:absolute;top:50%;left:50%;margin-top:-185px;margin-left:-185px;">
+          <div class="orbit-dot" style="width:11px;height:11px;background:var(--lav-soft);opacity:.7;"></div>
+        </div>
+        <div class="orbit" style="width:420px;height:420px;animation-duration:34s;animation-direction:reverse;position:absolute;top:50%;left:50%;margin-top:-210px;margin-left:-210px;">
+          <div class="orbit-dot" style="width:8px;height:8px;background:var(--blush);opacity:.6;"></div>
+        </div>
+        <div class="spin-outer">
+          <div class="spin-inner">
+            <div class="spin-mono">AM</div>
+            <div class="spin-sub">Open to Opportunities</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025 Aishwarya M · Chief HR &amp; Admin</span>
+  <span>Crafted with <span style="color:var(--lav-soft)">♡</span> in Vadavalli, Coimbatore</span>
+  <a href="https://www.linkedin.com/in/aishwarya-m-533280247" target="_blank" rel="noopener">LinkedIn ↗</a>
+</footer>
+
+<script>
+/* ── CUSTOM CURSOR (mouse/desktop only) ── */
+var dot  = document.getElementById('cursor-dot');
+var ring = document.getElementById('cursor-ring');
+var mx = 0, my = 0, rx = 0, ry = 0;
+var cursorActive = false;
+
+if (window.matchMedia('(pointer:fine)').matches) {
+  document.body.classList.add('custom-cursor-active');
+  cursorActive = true;
+}
+
+document.addEventListener('mousemove', function(e) {
+  mx = e.clientX;
+  my = e.clientY;
+  if (cursorActive) {
+    dot.style.opacity  = '1';
+    ring.style.opacity = '1';
+  }
+});
+
+(function tick() {
+  if (cursorActive) {
+    dot.style.left  = mx + 'px';
+    dot.style.top   = my + 'px';
+    rx += (mx - rx) * 0.11;
+    ry += (my - ry) * 0.11;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+  }
+  requestAnimationFrame(tick);
+})();
+
+document.querySelectorAll('a, .btn, .tag, .skill-card, .clink').forEach(function(el) {
+  el.addEventListener('mouseenter', function() {
+    if (!cursorActive) return;
+    ring.style.width  = '54px';
+    ring.style.height = '54px';
+    ring.style.borderColor = 'var(--blush)';
+  });
+  el.addEventListener('mouseleave', function() {
+    if (!cursorActive) return;
+    ring.style.width  = '38px';
+    ring.style.height = '38px';
+    ring.style.borderColor = 'var(--lav-soft)';
+  });
+});
+
+/* ── PARTICLES ── */
+var pc = document.getElementById('particles');
+for (var i = 0; i < 38; i++) {
+  var p = document.createElement('div');
+  p.className = 'particle';
+  var s = 2 + Math.random() * 3;
+  p.style.cssText =
+    'left:'  + (Math.random() * 100) + '%;' +
+    'top:'   + (Math.random() * 100) + '%;' +
+    'width:' + s + 'px;height:' + s + 'px;' +
+    'animation-delay:'    + (Math.random() * 7) + 's;' +
+    'animation-duration:' + (3 + Math.random() * 5) + 's';
+  pc.appendChild(p);
+}
+
+/* ── SCROLL REVEAL ── */
+var io = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal, .exp-item, .skill-card, .edu-card').forEach(function(el) {
+  io.observe(el);
+});
+
+/* ── STAGGER ANIMATIONS ── */
+document.querySelectorAll('.skill-card').forEach(function(c, i) { c.style.transitionDelay = (i * 0.08) + 's'; });
+document.querySelectorAll('.exp-item').forEach(function(c, i)   { c.style.transitionDelay = (i * 0.14) + 's'; });
+document.querySelectorAll('.edu-card').forEach(function(c, i)   { c.style.transitionDelay = (i * 0.12) + 's'; });
+
+/* ── NAV ACTIVE HIGHLIGHT ── */
+var secs  = document.querySelectorAll('section[id]');
+var navAs = document.querySelectorAll('.nav-links a');
+
+window.addEventListener('scroll', function() {
+  var current = '';
+  secs.forEach(function(sec) {
+    if (window.scrollY >= sec.offsetTop - 120) {
+      current = sec.getAttribute('id');
+    }
+  });
+  navAs.forEach(function(a) {
+    a.classList.remove('active');
+    if (a.getAttribute('href') === '#' + current) {
+      a.classList.add('active');
+    }
+  });
+}, { passive: true });
+</script>
+</body>
+</html>
